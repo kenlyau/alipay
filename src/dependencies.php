@@ -12,7 +12,7 @@ $container['renderer'] = function ($c) {
 // alipay config
 $container['alipay'] = function($c) {
    $settings = $c->get('settings')['alipay'];
-   return json_decode(file_get_contents($settings['config_path']), true); 
+   return json_decode(file_get_contents($settings['config_path'])); 
 };
 
 // monolog
