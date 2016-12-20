@@ -1,4 +1,10 @@
 <?php
+
+use App\Services\Config;
+
+define ('BASE_PATH', __DIR__ . '/../');
+define ('VERSION', '0.1.0');
+
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
     // something which should probably be served as a static file
@@ -16,6 +22,8 @@ session_start();
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);
+
+new Config($settings);
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';

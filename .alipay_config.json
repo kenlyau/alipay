@@ -1,16 +1,17 @@
 {
     "alipay_url": "https://mapi.alipay.com/getway.do",
     "service": "create_direct_pay_by_user",
-    "partner": "",
+    "partner": "208xxxxxxxxxxxxxx",
     "_input_charset": "UTF-8",
-    "private_key": "",
-    "public_key": "",
+    "public_key_path": "alipay_public_key.pem",
+    "private_key_path": "rsa_private_key.pem",
     "sign_type": "RSA",
-    "cacert": "",
+    "cacert": "cacert.pem",
     "transport": "http",
+    "key": "xxxxxxxxxxxxxxxxxxx",
     "payment_type": "1",
-    "notify_url": "",
+    "notify_url": "http://xxxx.com",
     "return_url": "",
-    "seller_id": "",
-    "sign": ""
-}
+    "seller_id": "208xxxxxxxxxxxxxx",
+ }
+

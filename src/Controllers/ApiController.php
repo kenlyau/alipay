@@ -2,12 +2,17 @@
 
 namespace App\Controllers;
 
-class ApiController {
+class ApiController extends BaseController {
     public function index($request, $response, $args) {
         return "api index";
     }
     public function createOrder($request, $response, $args) {
-        return "api createOrder";
+     
+        $res = [
+          "rest" => 1
+   
+        ];
+        return $this->echoJson($response, $res);
     }
     public function orderInfo($request, $response, $args) {
         return "api orderInfo" . $args['id'];
@@ -15,4 +20,4 @@ class ApiController {
     public function reception($request, $response, $args) {
         return "success";
     }
-};
+}
