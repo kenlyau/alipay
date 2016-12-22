@@ -67,7 +67,6 @@ class Alipay {
         if ($this->is_mobile) {
             $this->gateway = self::GATEWAY_MOBILE;
         }
-            
         if ($type == 'wap' || $type === true) {
             $this->service = self::SERVICE_WAP;
         } elseif ($type == 'app') {

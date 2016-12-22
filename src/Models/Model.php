@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
-class Model {
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
+class Model extends Eloquent {
     public $timestamps = false;
 }

@@ -11,7 +11,7 @@ return [
 
         // alipay settings
         'alipay' => [
-             'config_path' => __DIR__ . '/../alipay_config.json'
+             'config_path' => __DIR__ . '/../alipay_config.json',
         ],
 
         // Monolog settings
@@ -20,5 +20,11 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+        // Database
+        'db' => [
+            'driver' => 'sqlite',
+            'database' => __DIR__ . '/../data/database.sqlite',
+            'prefix' => '',
+        ]
     ],
 ];

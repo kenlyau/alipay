@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>岭尚智信息支付系统</title>
+        <style>
+            body {
+                margin: 50px 0 0 0;
+                padding: 0;
+                width: 100%;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                text-align: center;
+                color: #aaa;
+                font-size: 18px;
+            }
+
+            h1 {
+                color: #719e40;
+                letter-spacing: -3px;
+                font-family: 'Lato', sans-serif;
+                font-size: 100px;
+                font-weight: 200;
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body> 
+        
+        <form action="/api/order" method="post" target="_blank">
+            <table>
+			    <tr>
+				    <th>商品ID：</th>
+					<td><input type="text" name="order_id" value="{{out_trade_no}}"></td>
+				</tr>
+				<tr> 
+				    <th>付款金额：</th>
+					<td><input type="text" name="amount" value="{{total_fee}}"></td>
+				</tr>
+				<tr>
+				    <th>商品名称：</th>
+					<td><input type="text" name="subject" value="{{subject}}"></td>
+				</tr>
+				<tr>
+				    <th>商品描述：</th>
+					<td><input type="text" name="body" value="{{body}}"></td>
+				</tr>
+				<tr>
+				    <th>商品地址：</th>
+					<td><input type="text" name="show_url" value="{{show_url}}"></td>
+				</tr>
+				<tr>
+				    <th></th>
+					<td>
+					    <input type="hidden" name="user_id" value="test999">
+						<input type="hidden" name="from" value="pay.yinsunz.com">
+					    <button type="sbumit">submit</button>
+					</td>
+				</tr>
+			</table>
+        </form> 
+    </body>
+</html>

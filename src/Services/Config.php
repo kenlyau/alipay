@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
-class Config {
-    private static $settings; 
-    public function __construct ($set) {
+use Illuminate\Database\Capsule\Manager as Capsule;
 
-         self::$settings = $set['settings'];
-    }
-    public static function getAlipayConfig() {
-         $alipay_path =  self::$settings['alipay']['config_path'];
-         return json_decode(file_get_contents($alipay_path), true);
-      
+class Config {
+    public function __construct ($settings) {
+        $capsule = new Capsule;
+        $capsule->addConnection($settings['settings']['db']);
+        $capsule->bootEloquent();        
+
     }
 }
