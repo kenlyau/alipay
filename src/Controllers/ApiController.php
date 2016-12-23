@@ -23,7 +23,7 @@ class ApiController extends BaseController {
     public function createOrder($request, $response, $args) {
     
     $body = $request->getParsedBody();
-    print_r($body); 
+     
     $order = new Order;
     $order->order_id = $body['order_id'];
     $order->subject = $body['subject'];
@@ -46,15 +46,30 @@ class ApiController extends BaseController {
     
     $alipayBody = $this->alipay->buildRequestFormHTML($alipayParams) ;    
     //    var_dump($this->alipay);die;
-    //    $response->getBody()->write($body);
-    //    return $response;
+        $response->getBody()->write($alipayBody);
+        return $response;
     }
     public function orderInfo($request, $response, $args) {
-        return "api orderInfo" . $args['id'];
+        $id = $args['id'];
+        $result = Order::where('order_id','=', $id)->first();
+        if(empty($result)){
+            $res = [
+               "ret" => 0,
+               "msg" => "not found order info"
+            ];
+            return $this->echoJson($response, $res);
+       }
+       return $this->echoJson($response, $result);
     }
     public function reception($request, $response, $args) {
+        
         $body = $request->getParsedBody();
         $this->logger->info(json_encode($body));
+        
+        $verify = $this->alipay->verifyCallback();
+        if (empty($body['sign']) || !$verify){
+            return "error";
+        }
         
         $bill = new Bill;
         $bill->out_trade_no = $body['out_trade_no'];//order_id
@@ -71,7 +86,7 @@ class ApiController extends BaseController {
         $result = Order::where('order_id', '=', $body['out_trade_no'])->first();
         
         if(empty($result)){
-           return "i-success";
+           return "success";
         }
 
         if($body['trade_status'] == 'TRADE_SUCCESS'){

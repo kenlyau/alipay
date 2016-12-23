@@ -13,5 +13,20 @@ $app->group('/api', function() {
     $this->post("/order", 'App\Controllers\ApiController:createOrder');
     $this->post('/reception', 'App\Controllers\ApiController:reception');
 
+});
 
+$app->group('/manage', function() {
+    $this->get('', 'App\Controllers\ManageController:index');
+    $this->get('/', 'App\Controllers\ManageController:index');
+    $this->get('/bill', 'App\Controllers\ManageController:bill');
+    $this->get('/order', 'App\Controllers\ManageController:order');
+    $this->get('/user', 'App\Controllers\ManageController:user');
+    $this->post('/pass', 'App\Controllers\ManageController:pass');
+});
+
+$app->group('auth', function() {
+    $this->get('', 'App\Controllers\AuthController:login');
+    $this->get('/', 'App\Controllers\AuthController:login');
+    $this->get('/login', 'App\Controllers\AuthController:login');
+    $this->post('/login', 'App\Controllers\AuthController:loginDo');
 });

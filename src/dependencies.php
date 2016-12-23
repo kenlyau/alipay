@@ -13,7 +13,10 @@ $container = $app->getContainer();
 $container['view'] = function($c) {
     $settings = $c->get('settings')['renderer'];
     $view = new Slim\Views\Twig($settings['template_path']);
-  
+    $view->parseOptions = array(
+        'debug' => true,
+        'cache' => BASE_PATH . '/data/cache'
+    ); 
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
 

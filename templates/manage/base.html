@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>岭尚支付系统</title>
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/css/custom.css">
+        {% block header %}
+        {% endblock %}
+    </head>
+    <body class="nav-md">
+         <div class="container body">
+              <div class="main_container">
+                   <div class="col-md-3 left_col menu_fixed">
+                        <div class="left_col scroll-view">
+						     <div class="navbar nav_title">
+							      <a href="/manage" class="site_title">
+								     <span>岭尚支付系统</span>
+								  </a>
+							 </div>
+							 <div class="clearfix"></div>
+							 <div class="main_menu_site main_menu" id="sidebar-menu">
+							      <div class="menu_section active">
+								       <ul class="nav side-menu">
+									        <li>
+										       <a href="/manage/user">
+											       <i class="fa fa-user" ></i>用户信息
+											   </a>
+										    </li>
+									        <li>
+										       <a href="/manage/order">
+											       <i class="fa fa-bar-chart"></i>订单记录
+											   </a>
+										    </li>
+											<li>
+										       <a href="/manage/bill">
+											       <i class="fa fa-database"></i>支付记录
+											   </a>
+										    </li>
+									   </ul>
+								  </div>
+							 </div>
+						</div>                   
+                   </div>
+                   <div class="top_nav">
+                        <div class="nav_menu">
+                             <nav role="navigation">
+                                  <div class="nav toggle"><a id="menu_toggle"><i class="fa fa-bars"></i></a></div>
+                                  <ul class="nav navbar-nav navbar-right">
+                                       <li>
+                                            <a href="javascript:;" class="user-profile dropdown">john doe</a>
+                                       </li>
+                                  </ul>
+                             </nav>
+                        </div>
+                   </div>
+                   <div class="right_col" role="main">
+				   <div class="clearfix"></div>
+                   {% block content %}
+                   {% endblock%}
+                   </div>
+                   
+              </div>
+         </div>
+         <script src="/assets/js/jquery.min.js"></script>
+         <script src="/assets/js/bootstrap.min.js"></script>
+         <script src="/assets/js/custom.js"></script>
+         
+         {% block footer %}
+         {% endblock %}
+    </body>
+</html>
