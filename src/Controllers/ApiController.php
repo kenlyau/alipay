@@ -22,29 +22,29 @@ class ApiController extends BaseController {
     }
     public function createOrder($request, $response, $args) {
     
-    $body = $request->getParsedBody();
-     
-    $order = new Order;
-    $order->order_id = $body['order_id'];
-    $order->subject = $body['subject'];
-    $order->user_id = $body['user_id'];
-    $order->amount = $body['amount'];
-    $order->from = $body['from'];
+        $body = $request->getParsedBody();
+        
+        $order = new Order;
+        $order->order_id = $body['order_id'];
+        $order->subject = $body['subject'];
+        $order->user_id = $body['user_id'];
+        $order->amount = $body['amount'];
+        $order->from = $body['from'];
 
-    $result = $order->save();
-    if (!$result){
-       return "error";
-    }
-    $alipayParams = [
-         'out_trade_no' => $body['order_id'],
-         'total_fee' => $body['amount'],
-         'subject' => $body['subject'],
-         'body' => $body['body'],
-         'show_url' => $body['show_url']
-    ];
+        $result = $order->save();
+        if (!$result){
+        return "error";
+        }
+        $alipayParams = [
+            'out_trade_no' => $body['order_id'],
+            'total_fee' => $body['amount'],
+            'subject' => $body['subject'],
+            'body' => $body['body'],
+            'show_url' => $body['show_url']
+        ];
 
-    
-    $alipayBody = $this->alipay->buildRequestFormHTML($alipayParams) ;    
+        
+        $alipayBody = $this->alipay->buildRequestFormHTML($alipayParams) ;    
     //    var_dump($this->alipay);die;
         $response->getBody()->write($alipayBody);
         return $response;

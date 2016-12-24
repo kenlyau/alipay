@@ -1,4 +1,60 @@
 {% extends 'manage/base.html' %}
 {% block content %}
-order
+<div class="row">
+    <div class="x_panel">
+        <div class="x_title clearfix">
+            <h2>Order</h2>
+        </div>
+        <div class="x_content">
+             
+             <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>订单ID</th>
+                        <th>商品名称</th>
+                        <th>金额</th>
+                        <th>支付状态</th>
+                        <th>时间</th>
+                        <th>渠道</th>
+                        <th>用户识别</th>
+                        <th>&</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{order.order_id}}</td>
+                        <td>{{order.subject}}</td>
+                        <td>{{order.amount}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.create_date|date('Y-m-d')}}</td>
+                        <td>{{order['from']}}</td>
+                        <td>{{order.user_id}}</td>
+                        <td><a href="javascript:;" data-id="{{order.id}}" class="delete">x</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include 'partial/paging.html' with {'arrays': orders} %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    <script>
+    $(".delete").on("click", function(e) {
+   
+        $.ajax({
+            url: "/manage/order/" + $(this).data("id"),
+            type: "delete",
+            success: function(response){
+                 if (response.ret == 1){
+                     location.reload();
+                 }
+            }
+        })
+    })
+    </script>
 {% endblock %}

@@ -1,4 +1,53 @@
 {% extends 'manage/base.html' %}
 {% block content %}
-bill
+<div class="row">
+    <div class="x_panel">
+        <div class="x_title clearfix">
+            <h2>Bill</h2>
+        </div>
+        <div class="x_content">
+             
+             <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>订单ID</th>
+                        <th>支付宝支付ID</th>
+                        <th>商品名称</th>
+                        <th>金额</th>
+                        <th>邮箱</th>
+                        <th>&</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bill in bills %}
+                    <tr>
+                        <td>{{bill.out_trade_no}}</td>
+                        <td>{{bill.trade_no}}</td>
+                        <td>{{bill.subject}}</td>
+                        <td>{{bill.price}}</td>
+                        <td>{{bill.buyer_email}}</td>
+                        <td><a href="javascript:;" data-id="{{bill.id}}" class="delete">x</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include 'partial/paging.html' with {'arrays': bills} %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    $(".delete").on("click", function(e) {
+        $.ajax({
+            url: "/manage/bill/" + $(this).data("id"),
+            type: "delete",
+            success: function(response){
+                 if (response.ret == 1){
+                     location.reload();
+                 }
+            }
+        })
+    })
 {% endblock %}

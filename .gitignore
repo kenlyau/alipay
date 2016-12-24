@@ -2,6 +2,7 @@ alipay_config.json
 rsa_private_key.pem
 alipay_public_key.pem
 composer.phar
+.DS_Store
 /vendor/
 /logs/
 

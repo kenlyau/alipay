@@ -4,7 +4,7 @@ use App\Services\Config;
 
 define ('BASE_PATH', __DIR__ . '/../');
 define ('VERSION', '0.1.0');
-
+date_default_timezone_set('PRC');
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
     // something which should probably be served as a static file
