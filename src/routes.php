@@ -26,7 +26,7 @@ $app->group('/manage', function() {
     $this->put('/pass', 'App\Controllers\ManageController:pass');
 });
 
-$app->group('auth', function() {
+$app->group('/auth', function() {
     $this->get('', 'App\Controllers\AuthController:login');
     $this->get('/', 'App\Controllers\AuthController:login');
     $this->get('/login', 'App\Controllers\AuthController:login');

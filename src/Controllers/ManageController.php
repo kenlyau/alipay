@@ -129,9 +129,25 @@ class ManageController extends BaseController
 
     public function pass($request, $response, $args)
     { 
-        if ($request->getQueryParams()[id]){
-            
+        $result = [
+            "ret" => 0
+        ];
+        
+        if (!isset($request->getParsedBody()['id'])){
+            $result['msg'] = "not found id";
+            return $this->echoJson($response,$result);
         }
-        $user = User::find()
+        
+        $user = User::find($request->getParsedBody()['id']);
+        
+        if (empty($user)){
+            $result['msg'] = "not found user";
+            return $this->echoJson($response,$result);
+        }
+        $user['pass'] = sha1($request->getQueryParams()['pass']);
+        $user->save();
+        $result['ret'] = 1;
+
+        return $this->echoJson($response, $result);
     }
 }
