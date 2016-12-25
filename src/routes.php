@@ -24,11 +24,12 @@ $app->group('/manage', function() {
     $this->delete('/order/{id}', 'App\Controllers\ManageController:deleteOrder');
     $this->get('/user', 'App\Controllers\ManageController:user');
     $this->put('/pass', 'App\Controllers\ManageController:pass');
-});
+})->add(new Auth());
 
 $app->group('/auth', function() {
     $this->get('', 'App\Controllers\AuthController:login');
     $this->get('/', 'App\Controllers\AuthController:login');
     $this->get('/login', 'App\Controllers\AuthController:login');
     $this->post('/login', 'App\Controllers\AuthController:loginDo');
+    $this->get('/loginout', 'App\Controllers\AuthController:loginOut');
 });
