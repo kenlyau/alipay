@@ -23,7 +23,7 @@ $app->group('/manage', function() {
     $this->get('/order', 'App\Controllers\ManageController:order');
     $this->delete('/order/{id}', 'App\Controllers\ManageController:deleteOrder');
     $this->get('/user', 'App\Controllers\ManageController:user');
-    $this->post('/pass', 'App\Controllers\ManageController:pass');
+    $this->put('/pass', 'App\Controllers\ManageController:pass');
 });
 
 $app->group('auth', function() {

@@ -1,4 +1,73 @@
 {% extends 'manage/base.html' %}
 {% block content %}
-user
+<div class="row">
+    <div class="col-md-12 col-sm-12 clo-xs-12">
+        <div class="x_panel tile ">
+            <div class="x_tile clearfix">
+                <h2>修改密码</h2>
+            </div>
+            <div class="x_content">
+                <div class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-2 col-xs-6">管理员账号</label>
+                        <div class="col-md-2 col-sm-3 col-xs-6">
+                            <input type="text" class="form-control" value="{{user.name}}" disabled>
+                            <input type="hidden" id="userid" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-2 col-xs-6">新密码</label>
+                        <div class="col-md-2 col-sm-3 col-xs-6">
+                            <input type="password" class="form-control" id="pass"> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-2 col-xs-6">确认密码</label>
+                        <div class="col-md-2 col-sm-3 col-xs-6">
+                            <input type="password" class="form-control" id="repass"> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2 col-sm-3 col-xs-6 col-md-offset-1 col-sm-offset-2 col-xs-offset-6">
+                            <button id="submit" type="button" class="btn btn-success">修&nbsp;改</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script>
+    $("#submit").on("click", function(){
+        if ($("#pass").val() != $("#repass").val()){
+            alert("两次密码不一致");
+            return;
+        }
+        if (!$("#pass").val()){
+            alert("请输入密码");
+            return;
+        }
+        if ($("#pass").val().length < 6){
+            alert("密码过短，最少6个字符");
+            return;
+        }
+        $ajax({
+            type: "put",
+            url: "/manage/pass",
+            data: {
+                'id': $("#userid").val(),
+                'pass': $("#pass").val()
+            },
+            success: function(response){
+                if (response.ret == 1){
+                    alert("密码修改成功");
+                    location.reload();
+                }
+            }
+        })
+    });
+</script>
 {% endblock %}

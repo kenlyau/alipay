@@ -3,10 +3,44 @@
 {% block content %}
 <div class="row tile_count">
     {% for item in stats %}
-    <div class="col-md-3 col-sm-6 tile_stats_count">
+    <div class="col-md-3 col-sm-6 col-xs-6 tile_stats_count">
 	    <span class="count_top">{{item.name}}</span>
 		<div class="count">{{item.number}}</div>
 	</div>
 	{% endfor %}
 </div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="dashboard_graph">
+			<canvas id="line" style="height:300px; width: 100%;"></canvas>
+		</div>	
+	</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="/assets/js/chart.min.js"></script>
+<script>
+    
+	var line = new Chart('line', {
+		type: 'line',
+		data: {
+			labels: {{dateXaxes|json_encode()|raw}},
+			
+            datasets: [
+				{
+					backgroundColor: 'rgba(26, 187, 156, 0.5)',
+					borderColor: 'rgba(26, 187, 156, 1)',
+					label: '最近一月收入',
+					data: {{dateYaxes|json_encode()|raw}}
+				}
+			]
+
+		},
+		options: {
+			responsive: false
+		}
+	})
+
+</script>
 {% endblock %}

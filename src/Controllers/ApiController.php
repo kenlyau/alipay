@@ -30,6 +30,7 @@ class ApiController extends BaseController {
         $order->user_id = $body['user_id'];
         $order->amount = $body['amount'];
         $order->from = $body['from'];
+        $order->create_date = time();
 
         $result = $order->save();
         if (!$result){

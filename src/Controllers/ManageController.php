@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Bill;
 use App\Models\Order;
+use App\Models\User;
 
 class ManageController extends BaseController 
 {
@@ -31,6 +32,29 @@ class ManageController extends BaseController
              ]
         );
 
+        
+        $currentMonthOrder = Order::whereDate('create_date', '>=', date('Y-m-01'))->where('status', '=', 'success')->get();
+        
+        $startDate = date('Y-m-d', strtotime('-1 months', time()));
+        $endDate = date('Y-m-d');
+        $days = date('t', strtotime($startDate));
+        $dateArray = [];
+        $dateXaxes = [];
+        for($i=1; $i<=$days; $i++) 
+        {
+            $dateArray[date('Y-m-d', strtotime($startDate) + $i*24*60*60)] = 0 ;
+            $dateXaxes[] = date('m-d', strtotime($startDate) + $i*24*60*60);
+        }
+        
+        foreach($currentMonthOrder as $order){
+            $newDay = date('Y-m-d',strtotime($order['create_date']));
+            if(isset($dateArray[$newDay ])){
+                $dateArray[$newDay] += $order['amount']; 
+            }
+        }
+       
+        $data['dateXaxes'] = $dateXaxes;
+        $data['dateYaxes'] = array_values($dateArray);
         $this->view->render($response, 'manage/index.html', $data);
     }
     
@@ -95,12 +119,19 @@ class ManageController extends BaseController
 
     public function user($request, $response, $args)
     {
-       $data = [];
+        $user = User::first();
+        $data = [
+            'user' => $user
+        ];
+       
        $this->view->render($response, 'manage/user.html', $data);
     }
 
-    public function pass()
+    public function pass($request, $response, $args)
     { 
-
+        if ($request->getQueryParams()[id]){
+            
+        }
+        $user = User::find()
     }
 }

@@ -17,7 +17,7 @@
                         <th>时间</th>
                         <th>渠道</th>
                         <th>用户识别</th>
-                        <th>&</th>
+                        <!--<th>&</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@
                         <td>{{order.create_date|date('Y-m-d')}}</td>
                         <td>{{order['from']}}</td>
                         <td>{{order.user_id}}</td>
-                        <td><a href="javascript:;" data-id="{{order.id}}" class="delete">x</a></td>
+                        <!--<td><a href="javascript:;" data-id="{{order.id}}" class="delete">x</a></td>-->
                     </tr>
                     {% endfor %}
                 </tbody>
