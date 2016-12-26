@@ -8,7 +8,7 @@ class AuthController extends BaseController
 {
     public function login($request, $response, $args)
     {
-        if ($_SESSION['userName']){
+        if (isset($_SESSION['userName'])){
             return $this->redirect($response, '/manage');
         }
         $this->view->render($response,'auth/login.html');
