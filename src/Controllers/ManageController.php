@@ -66,7 +66,7 @@ class ManageController extends BaseController
         }
         
        
-        $data = Bill::paginate($this->page_item, ['*'], 'page', $pageNum);
+        $data = Bill::orderBy('id', 'desc')->paginate($this->page_item, ['*'], 'page', $pageNum);
         $data->setPath('/manage/bill');
         $result = [
             'bills' => $data 
@@ -95,7 +95,7 @@ class ManageController extends BaseController
            $pageNum = $request->getQueryParams()['page'];
        }
 
-       $data = Order::paginate($this->page_item, ['*'], 'page', $pageNum);
+       $data = Order::orderBy('id', 'desc')->paginate($this->page_item, ['*'], 'page', $pageNum);
        $data->setPath('/manage/order');
        $result = [
            'orders' => $data

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Order;
 use App\Models\Bill;
+use App\Services\Utils;
 
 class ApiController extends BaseController {
     
@@ -30,6 +31,8 @@ class ApiController extends BaseController {
         $order->user_id = $body['user_id'];
         $order->amount = $body['amount'];
         $order->from = $body['from'];
+        $order->notifi = $body['notifi'];
+        $order->return_url = $body['return_url'];
         $order->create_date = time();
 
         $result = $order->save();
@@ -93,6 +96,11 @@ class ApiController extends BaseController {
         if($body['trade_status'] == 'TRADE_SUCCESS'){
             $result->status = 'success';
             $result->save();
+          
+        }
+
+        if (!empty($result->notifi)) {
+            Utils::curlPost($result->notifi, $body);
         }
            
         return "success";

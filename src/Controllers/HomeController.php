@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 class HomeController extends BaseController
 {
     public function index($request, $response, $args)
@@ -18,6 +19,7 @@ class HomeController extends BaseController
             'body'           => '啤酒配面包',
             'show_url'       => ''
         ];
+       
         $this->view->render($response, 'demo.html', $data);
     }
 
