@@ -105,4 +105,22 @@ class ApiController extends BaseController {
            
         return "success";
     }
+
+    public function returnUrl ($request, $response, $args)
+    { 
+         $params = $request->getQueryParams();
+         $verify = $this->alipay->verifyCallback() ;
+         if (!isset($params['sign']) || !$verify || isset($params['out_trade_no'])) {
+              return "error";
+         }     
+         $order = Order::where('order_id', '=', $params['out_trade_no']);
+         if (empty($order)){
+             return "error";
+         }
+         if (empty($order['return_url'])){
+             return "支付成功";
+         }
+         
+         $this->redirect($response, $order['return_url']);
+    }
 }

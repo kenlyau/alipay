@@ -12,7 +12,7 @@ $app->group('/api', function() {
     $this->get("/order/{id}", 'App\Controllers\ApiController:orderInfo');
     $this->post("/order", 'App\Controllers\ApiController:createOrder');
     $this->post('/reception', 'App\Controllers\ApiController:reception');
-
+    $this->get('/return_url', 'App\Controllers\ApiController:returnUrl');
 });
 
 $app->group('/manage', function() {
