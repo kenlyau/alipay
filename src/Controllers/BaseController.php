@@ -27,4 +27,12 @@ class BaseController {
          $newResponse = $response->withStatus(302)->withHeader('Location', $to);
          return $newResponse;
     } 
+    public function jsRedirect($reponse, $method, $to, $params) {
+         $html = '<html><head><meta charset="utf-8"></head><body><form action="'. $to .'" method="'.$method.'" name="return_url" id="return_url">';
+	 foreach ($params as $key => $value ) {
+	     $html .= '<input type="hidden" name="'. $key .'" value="'. $value .'"/>';
+	 }
+	 $html .= '</form><script>document.forms["return_url"].submit();</script></body></html>';
+         return $reponse->getBody()->write($html);
+    }
 }

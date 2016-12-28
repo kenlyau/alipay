@@ -79,7 +79,7 @@ class ApiController extends BaseController {
         $bill->out_trade_no = $body['out_trade_no'];//order_id
         $bill->trade_no = $body['trade_no'];
         $bill->trade_status = $body['trade_status'];
-        $bill->buyer_email = $body['buyer_eamil'] ;
+        $bill->buyer_email = $body['buyer_email'] ;
         $bill->price = $body['price'] ;
         $bill->subject = $body['subject'] ;
         $bill->gmt_create = $body['gmt_create'];
@@ -110,17 +110,17 @@ class ApiController extends BaseController {
     { 
          $params = $request->getQueryParams();
          $verify = $this->alipay->verifyCallback() ;
-         if (!isset($params['sign']) || !$verify || isset($params['out_trade_no'])) {
+         if (!isset($params['sign']) || !$verify || !isset($params['out_trade_no'])) {
               return "error";
          }     
-         $order = Order::where('order_id', '=', $params['out_trade_no']);
+         $order = Order::where('order_id', '=', $params['out_trade_no'])->first();
          if (empty($order)){
              return "error";
          }
-         if (empty($order['return_url'])){
+         if (empty($order->return_url)){
+	  
              return "支付成功";
          }
-         
-         $this->redirect($response, $order['return_url']);
+         return $this->jsRedirect($response, 'get', $order->return_url, $params); 
     }
 }
